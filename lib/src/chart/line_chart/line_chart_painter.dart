@@ -877,7 +877,8 @@ class LineChartPainter extends AxisChartPainter<LineChartData>
     if (leftTitles.showTitles) {
       double verticalSeek = data.minY;
       while (verticalSeek <= data.maxY) {
-        if (leftTitles.checkToShowTitle(data.minY, data.maxY, leftTitles, verticalSeek)) {
+        if (leftTitles.checkToShowTitle(
+            data.minY, data.maxY, leftTitles, leftInterval, verticalSeek)) {
           double x = 0 + getLeftOffsetDrawSize();
           double y = getPixelY(verticalSeek, viewSize);
 
@@ -885,10 +886,10 @@ class LineChartPainter extends AxisChartPainter<LineChartData>
 
           final TextSpan span = TextSpan(style: leftTitles.textStyle, text: text);
           final TextPainter tp = TextPainter(
-            text: span,
-            textAlign: TextAlign.center,
-            textDirection: TextDirection.ltr,
-            textScaleFactor: textScale);
+              text: span,
+              textAlign: TextAlign.center,
+              textDirection: TextDirection.ltr,
+              textScaleFactor: textScale);
           tp.layout(maxWidth: getExtraNeededHorizontalSpace());
           x -= tp.width + leftTitles.margin;
           y -= tp.height / 2;
@@ -906,7 +907,6 @@ class LineChartPainter extends AxisChartPainter<LineChartData>
           verticalSeek += leftInterval;
         }
       }
-
     }
 
     // Top titles
@@ -916,7 +916,8 @@ class LineChartPainter extends AxisChartPainter<LineChartData>
     if (topTitles.showTitles) {
       double horizontalSeek = data.minX;
       while (horizontalSeek <= data.maxX) {
-        if (topTitles.checkToShowTitle(data.minX, data.maxX, topTitles, horizontalSeek)) {
+        if (topTitles.checkToShowTitle(
+            data.minX, data.maxX, topTitles, topInterval, horizontalSeek)) {
           double x = getPixelX(horizontalSeek, viewSize);
           double y = getTopOffsetDrawSize();
 
@@ -924,10 +925,10 @@ class LineChartPainter extends AxisChartPainter<LineChartData>
 
           final TextSpan span = TextSpan(style: topTitles.textStyle, text: text);
           final TextPainter tp = TextPainter(
-            text: span,
-            textAlign: TextAlign.center,
-            textDirection: TextDirection.ltr,
-            textScaleFactor: textScale);
+              text: span,
+              textAlign: TextAlign.center,
+              textDirection: TextDirection.ltr,
+              textScaleFactor: textScale);
           tp.layout();
 
           x -= tp.width / 2;
@@ -941,7 +942,7 @@ class LineChartPainter extends AxisChartPainter<LineChartData>
           canvas.restore();
         }
         if (data.maxX - horizontalSeek < topInterval && data.maxX != horizontalSeek) {
-          horizontalSeek = data.maxY;
+          horizontalSeek = data.maxX;
         } else {
           horizontalSeek += topInterval;
         }
@@ -955,7 +956,8 @@ class LineChartPainter extends AxisChartPainter<LineChartData>
     if (rightTitles.showTitles) {
       double verticalSeek = data.minY;
       while (verticalSeek <= data.maxY) {
-        if (rightTitles.checkToShowTitle(data.minY, data.maxY, rightTitles, verticalSeek)) {
+        if (rightTitles.checkToShowTitle(
+            data.minY, data.maxY, rightTitles, rightInterval, verticalSeek)) {
           double x = viewSize.width + getLeftOffsetDrawSize();
           double y = getPixelY(verticalSeek, viewSize);
 
@@ -963,10 +965,10 @@ class LineChartPainter extends AxisChartPainter<LineChartData>
 
           final TextSpan span = TextSpan(style: rightTitles.textStyle, text: text);
           final TextPainter tp = TextPainter(
-            text: span,
-            textAlign: TextAlign.center,
-            textDirection: TextDirection.ltr,
-            textScaleFactor: textScale);
+              text: span,
+              textAlign: TextAlign.center,
+              textDirection: TextDirection.ltr,
+              textScaleFactor: textScale);
           tp.layout(maxWidth: getExtraNeededHorizontalSpace());
 
           x += rightTitles.margin;
@@ -995,16 +997,17 @@ class LineChartPainter extends AxisChartPainter<LineChartData>
     if (bottomTitles.showTitles) {
       double horizontalSeek = data.minX;
       while (horizontalSeek <= data.maxX) {
-        if (bottomTitles.checkToShowTitle(data.minX, data.maxX, bottomTitles, horizontalSeek)) {
+        if (bottomTitles.checkToShowTitle(
+            data.minX, data.maxX, bottomTitles, bottomInterval, horizontalSeek)) {
           double x = getPixelX(horizontalSeek, viewSize);
           double y = viewSize.height + getTopOffsetDrawSize();
           final String text = bottomTitles.getTitles(horizontalSeek);
           final TextSpan span = TextSpan(style: bottomTitles.textStyle, text: text);
           final TextPainter tp = TextPainter(
-            text: span,
-            textAlign: TextAlign.center,
-            textDirection: TextDirection.ltr,
-            textScaleFactor: textScale);
+              text: span,
+              textAlign: TextAlign.center,
+              textDirection: TextDirection.ltr,
+              textScaleFactor: textScale);
           tp.layout();
 
           x -= tp.width / 2;
@@ -1019,7 +1022,7 @@ class LineChartPainter extends AxisChartPainter<LineChartData>
         }
 
         if (data.maxX - horizontalSeek < bottomInterval && data.maxX != horizontalSeek) {
-          horizontalSeek = data.maxY;
+          horizontalSeek = data.maxX;
         } else {
           horizontalSeek += bottomInterval;
         }
