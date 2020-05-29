@@ -63,7 +63,7 @@ class LineChartSample3 extends StatelessWidget {
                       return TouchedSpotIndicatorData(
                         FlLine(color: Colors.blue, strokeWidth: 4),
                         FlDotData(
-                          getDotDrawer: (spot, percent, barData, index) => FlDotCircleDrawer(
+                          getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
                               radius: 8,
                               color: Colors.white,
                               strokeWidth: 5,
@@ -132,7 +132,7 @@ class LineChartSample3 extends StatelessWidget {
                   ),
                   dotData: FlDotData(
                       show: true,
-                      getDotDrawer: (spot, percent, barData, index) => FlDotCircleDrawer(
+                      getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
                           radius: 6,
                           color: Colors.white,
                           strokeWidth: 3,
